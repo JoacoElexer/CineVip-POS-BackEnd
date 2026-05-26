@@ -2,18 +2,8 @@
 -- DDL — POS CineVIP (9 tablas PostgreSQL)
 -- ============================================================
 
-DROP TABLE IF EXISTS detalle_ventas CASCADE;
-DROP TABLE IF EXISTS ventas_totales CASCADE;
-DROP TABLE IF EXISTS funciones CASCADE;
-DROP TABLE IF EXISTS asientos CASCADE;
-DROP TABLE IF EXISTS salas CASCADE;
-DROP TABLE IF EXISTS promociones CASCADE;
-DROP TABLE IF EXISTS productos CASCADE;
-DROP TABLE IF EXISTS categorias CASCADE;
-DROP TABLE IF EXISTS empleados CASCADE;
-
 -- ============================================================
--- 4. Cuentas de Empleados
+-- 1. Cuentas de Empleados
 -- ============================================================
 CREATE TABLE empleados (
     id         SERIAL        PRIMARY KEY,
@@ -26,7 +16,7 @@ CREATE TABLE empleados (
 );
 
 -- ============================================================
--- 5. Categorías
+-- 2. Categorías
 -- ============================================================
 CREATE TABLE categorias (
     id         SERIAL        PRIMARY KEY,
@@ -36,7 +26,7 @@ CREATE TABLE categorias (
 );
 
 -- ============================================================
--- 6. Productos e Inventario
+-- 3. Productos e Inventario
 -- ============================================================
 CREATE TABLE productos (
     id              SERIAL          PRIMARY KEY,
@@ -49,7 +39,7 @@ CREATE TABLE productos (
 );
 
 -- ============================================================
--- 7. Promociones y Combos
+-- 4. Promociones y Combos
 -- ============================================================
 CREATE TABLE promociones (
     id           SERIAL          PRIMARY KEY,
@@ -61,7 +51,7 @@ CREATE TABLE promociones (
 );
 
 -- ============================================================
--- 8. Salas
+-- 5. Salas
 -- ============================================================
 CREATE TABLE salas (
     id         SERIAL        PRIMARY KEY,
@@ -72,7 +62,7 @@ CREATE TABLE salas (
 );
 
 -- ============================================================
--- 9. Asientos
+-- 6. Asientos
 -- ============================================================
 CREATE TABLE asientos (
     id            SERIAL        PRIMARY KEY,
@@ -87,7 +77,7 @@ CREATE TABLE asientos (
 );
 
 -- ============================================================
--- 10. Funciones
+-- 7. Funciones
 -- ============================================================
 CREATE TABLE funciones (
     id            SERIAL          PRIMARY KEY,
@@ -101,7 +91,7 @@ CREATE TABLE funciones (
 );
 
 -- ============================================================
--- 11. Ventas Totales (Cabecera Maestro)
+-- 8. Ventas Totales (Cabecera Maestro)
 -- ============================================================
 CREATE TABLE ventas_totales (
     id                SERIAL          PRIMARY KEY,
@@ -116,7 +106,7 @@ CREATE TABLE ventas_totales (
 );
 
 -- ============================================================
--- 12. Detalle de Ventas
+-- 9. Detalle de Ventas
 -- ============================================================
 CREATE TABLE detalle_ventas (
     id              SERIAL          PRIMARY KEY,
