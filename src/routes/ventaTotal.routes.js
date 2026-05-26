@@ -1,40 +1,40 @@
 /**
  * @swagger
- * /funciones:
+ * /ventas:
  *   get:
- *     summary: Obtiene todas las funciones
- *     tags: [Funciones]
+ *     summary: Obtiene todas las ventas
+ *     tags: [Ventas]
  *     responses:
  *       200:
- *         description: Lista de funciones
+ *         description: Lista de ventas
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Funcion'
+ *                 $ref: '#/components/schemas/VentaTotal'
  *   post:
- *     summary: Crea una nueva función
- *     tags: [Funciones]
+ *     summary: Crea una nueva venta
+ *     tags: [Ventas]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/FuncionInput'
+ *             $ref: '#/components/schemas/VentaTotalInput'
  *     responses:
  *       201:
- *         description: Función creada
+ *         description: Venta creada
  *       400:
  *         description: Datos inválidos
  */
 
 /**
  * @swagger
- * /funciones/{id}:
+ * /ventas/{id}:
  *   get:
- *     summary: Obtiene una función por ID
- *     tags: [Funciones]
+ *     summary: Obtiene una venta con sus detalles
+ *     tags: [Ventas]
  *     parameters:
  *       - in: path
  *         name: id
@@ -43,12 +43,12 @@
  *           type: integer
  *     responses:
  *       200:
- *         description: Función encontrada
+ *         description: Venta encontrada (incluye array de detalles)
  *       404:
  *         description: No encontrada
  *   put:
- *     summary: Actualiza una función
- *     tags: [Funciones]
+ *     summary: Actualiza una venta
+ *     tags: [Ventas]
  *     parameters:
  *       - in: path
  *         name: id
@@ -60,13 +60,13 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/FuncionInput'
+ *             $ref: '#/components/schemas/VentaTotalInput'
  *     responses:
  *       200:
- *         description: Función actualizada
+ *         description: Venta actualizada
  *   delete:
- *     summary: Elimina una función
- *     tags: [Funciones]
+ *     summary: Elimina una venta
+ *     tags: [Ventas]
  *     parameters:
  *       - in: path
  *         name: id
@@ -80,27 +80,27 @@
 
 /**
  * @swagger
- * /funciones/sala/{salaId}:
+ * /ventas/empleado/{empleadoId}:
  *   get:
- *     summary: Obtiene funciones por sala
- *     tags: [Funciones]
+ *     summary: Obtiene ventas por empleado
+ *     tags: [Ventas]
  *     parameters:
  *       - in: path
- *         name: salaId
+ *         name: empleadoId
  *         required: true
  *         schema:
  *           type: integer
  *     responses:
  *       200:
- *         description: Funciones de la sala
+ *         description: Ventas del empleado
  */
 
 /**
  * @swagger
- * /funciones/fecha/{fecha}:
+ * /ventas/fecha/{fecha}:
  *   get:
- *     summary: Obtiene funciones por fecha
- *     tags: [Funciones]
+ *     summary: Obtiene ventas por fecha
+ *     tags: [Ventas]
  *     parameters:
  *       - in: path
  *         name: fecha
@@ -111,37 +111,18 @@
  *         example: "2026-05-25"
  *     responses:
  *       200:
- *         description: Funciones en la fecha
- */
-
-/**
- * @swagger
- * /funciones/pelicula/{peliculaId}:
- *   get:
- *     summary: Obtiene funciones por película (ID de MongoDB)
- *     tags: [Funciones]
- *     parameters:
- *       - in: path
- *         name: peliculaId
- *         required: true
- *         schema:
- *           type: string
- *         description: _id de MongoDB de la película
- *     responses:
- *       200:
- *         description: Funciones de la película
+ *         description: Ventas en la fecha
  */
 
 const router = require('express').Router();
-const controller = require('../controllers/funcion.controller');
+const controller = require('../controllers/ventaTotal.controller');
 
 router.get('/', controller.getAll);
-router.get('/sala/:salaId', controller.findBySala);
-router.get('/fecha/:fecha', controller.findByFecha);
-router.get('/pelicula/:peliculaId', controller.findByPelicula);
 router.get('/:id', controller.getById);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.delete('/:id', controller.delete);
+router.get('/empleado/:empleadoId', controller.findByEmpleado);
+router.get('/fecha/:fecha', controller.findByFecha);
 
 module.exports = router;

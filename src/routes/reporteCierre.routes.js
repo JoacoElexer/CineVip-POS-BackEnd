@@ -1,40 +1,40 @@
 /**
  * @swagger
- * /perfiles-usuario:
+ * /reportes-cierre:
  *   get:
- *     summary: Obtiene todos los perfiles VIP
- *     tags: [Perfiles Usuario]
+ *     summary: Obtiene todos los reportes de cierre
+ *     tags: [Reportes Cierre]
  *     responses:
  *       200:
- *         description: Lista de perfiles
+ *         description: Lista de reportes
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/PerfilUsuario'
+ *                 $ref: '#/components/schemas/ReporteCierre'
  *   post:
- *     summary: Crea un nuevo perfil VIP
- *     tags: [Perfiles Usuario]
+ *     summary: Crea un nuevo reporte de cierre
+ *     tags: [Reportes Cierre]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/PerfilUsuarioInput'
+ *             $ref: '#/components/schemas/ReporteCierreInput'
  *     responses:
  *       201:
- *         description: Perfil creado
+ *         description: Reporte creado
  *       400:
  *         description: Datos inválidos
  */
 
 /**
  * @swagger
- * /perfiles-usuario/{id}:
+ * /reportes-cierre/{id}:
  *   get:
- *     summary: Obtiene un perfil por ID (ObjectId de MongoDB)
- *     tags: [Perfiles Usuario]
+ *     summary: Obtiene un reporte por ID (ObjectId de MongoDB)
+ *     tags: [Reportes Cierre]
  *     parameters:
  *       - in: path
  *         name: id
@@ -43,12 +43,12 @@
  *           type: string
  *     responses:
  *       200:
- *         description: Perfil encontrado
+ *         description: Reporte encontrado
  *       404:
  *         description: No encontrado
  *   put:
- *     summary: Actualiza un perfil VIP
- *     tags: [Perfiles Usuario]
+ *     summary: Actualiza un reporte de cierre
+ *     tags: [Reportes Cierre]
  *     parameters:
  *       - in: path
  *         name: id
@@ -60,13 +60,13 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/PerfilUsuarioInput'
+ *             $ref: '#/components/schemas/ReporteCierreInput'
  *     responses:
  *       200:
- *         description: Perfil actualizado
+ *         description: Reporte actualizado
  *   delete:
- *     summary: Elimina un perfil VIP
- *     tags: [Perfiles Usuario]
+ *     summary: Elimina un reporte de cierre
+ *     tags: [Reportes Cierre]
  *     parameters:
  *       - in: path
  *         name: id
@@ -80,37 +80,31 @@
 
 /**
  * @swagger
- * /perfiles-usuario/{id}/puntos:
- *   post:
- *     summary: Agrega puntos a un perfil VIP
- *     tags: [Perfiles Usuario]
+ * /reportes-cierre/fecha/{fecha}:
+ *   get:
+ *     summary: Obtiene reportes por fecha
+ *     tags: [Reportes Cierre]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: fecha
  *         required: true
  *         schema:
  *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/PuntosInput'
+ *           format: date
+ *         example: "2026-05-25"
  *     responses:
  *       200:
- *         description: Puntos actualizados
- *       404:
- *         description: Perfil no encontrado
+ *         description: Reportes en la fecha
  */
 
 const router = require('express').Router();
-const controller = require('../controllers/perfilUsuario.controller');
+const controller = require('../controllers/reporteCierre.controller');
 
 router.get('/', controller.getAll);
 router.get('/:id', controller.getById);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.delete('/:id', controller.delete);
-router.post('/:id/puntos', controller.agregarPuntos);
+router.get('/fecha/:fecha', controller.findByFecha);
 
 module.exports = router;
