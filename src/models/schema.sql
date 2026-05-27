@@ -10,7 +10,7 @@ CREATE TABLE empleados (
     nombre     VARCHAR(150)  NOT NULL,
     usuario    VARCHAR(100)  NOT NULL UNIQUE,
     password   VARCHAR(255)  NOT NULL,
-    rol        VARCHAR(50)   NOT NULL CHECK (rol IN ('Cajero', 'Administrador')),
+    rol        VARCHAR(50)   NOT NULL CHECK (rol IN ('Cajero', 'Administrador', 'Almacenista')),
     created_at TIMESTAMP     NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP     NOT NULL DEFAULT NOW()
 );
